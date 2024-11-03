@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great American Insurance Assistant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="logo">
+                <img src="/static/images/great-american-logo.png" alt="Great American Insurance Group">
+            </div>
+            <div class="header-divider"></div>
+            <p class="powered-by">AI Assistant powered by {{ ai_model }}</p>
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot welcome-message">
+                <div class="message-content">
+                    <div class="bot-avatar">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="message-text">
+                        <h2>Welcome to Great American Insurance</h2>
+                        <div class="welcome-features">
+                            <div class="feature">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Insurance Information</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Policy Questions</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-hands-helping"></i>
+                                <span>Claims Assistance</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Coverage Details</span>
+                            </div>
+                        </div>
+                        <p class="welcome-prompt">How can I assist you today?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="suggested-questions">
+                <button onclick="askQuestion('What insurance products do you offer?')">
+                    <i class="fas fa-box-open"></i>Insurance Products
+                </button>
+                <button onclick="askQuestion('How do I file a claim?')" class="claim-btn">
+                    <i class="fas fa-file-alt"></i>File a Claim
+                </button>
+                <button onclick="askQuestion('Get a Quote')">
+                    <i class="fas fa-calculator"></i>Get a Quote
+                </button>
+            </div>
+            
+            <div class="input-wrapper">
+                <input type="text" id="user-input" placeholder="Type your question here..." autocomplete="off">
+                <div class="input-buttons">
+                    <button class="voice-btn" onclick="startVoiceInput()" title="Voice Input">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button class="send-btn" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="file-upload-modal" id="fileUploadModal">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="hideFileUploadModal()">&times;</span>
+                    <h2>File a Claim</h2>
+                    <form id="claimForm" enctype="multipart/form-data" onsubmit="handleClaimSubmission(event)">
+                        <div class="form-group">
+                            <label>Claim Description:</label>
+                            <textarea id="claimDescription" rows="4" placeholder="Please describe your claim..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Supporting Documents:</label>
+                            <div class="upload-section">
+                                <input type="file" id="fileUpload" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                                <label for="fileUpload" class="upload-label">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    Choose Files
+                                </label>
+                            </div>
+                            <div id="fileList" class="file-list"></div>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="submit-btn">Submit Claim</button>
+                            <button type="button" class="cancel-btn" onclick="hideFileUploadModal()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+</body>
+</html> 
